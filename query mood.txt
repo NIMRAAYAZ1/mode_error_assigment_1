@@ -1,0 +1,53 @@
+
+--Goal: Here we use users table to pull a list of user email addresses. Edit the query to pull email
+addresses, but only for non-deleted users.
+SELECT email_address FROM dsv1069.users
+where deleted_at is  null
+
+--Goal: Use the items table to count the number of items for sale in each category
+select count(id),category
+FROM dsv1069.items 
+group by category
+--Goal: Select all of the columns from the result
+--when you JOIN the users table to the orders
+--tables 
+select * from  dsv1069.users as v left JOIN dsv1069.orders as u
+on  orders.user_id = users.id  
+
+
+--Goal: Check out the query below. This is not the right way to count the number of viewed_item
+SELECT
+distinct(count( event_id ))
+FROM dsv1069.events
+WHERE event_name = 'view_item'
+
+--Goal:Compute the number of items in the items table 
+--which have been ordered. The query
+--below runs, but it isn’t right. Determine 
+--what is wrong and correct the error or start from scratch.
+
+select count (distinct(orders.item_id))as item_code from 
+dsv1069.orders 
+
+----Goal: For each user figure out IF a user has ordered something, and when their first purchase
+was. The query below doesn’t return info for any of the users who haven’t ordered anything.
+SELECT ord.user_id, min(ord.paid_at)
+FROM dsv1069.users as itm  left  outer JOIN dsv1069.orders AS ord 
+ON ord.item_id = itm.id
+GROUP BY ord.user_id 
+ORDER By  ord.user_id
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
